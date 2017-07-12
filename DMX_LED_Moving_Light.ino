@@ -3,7 +3,7 @@
 
 #define    DMX512 (0)
 
-#define PIN 13
+#define LED13
 #define NUM_LEDS 64
 #define BRIGHTNESS 255
 
@@ -35,7 +35,7 @@ uint8_t GreenCurrent=0;
 uint8_t BlueCurrent=0;
 uint8_t WhiteCurrent=0;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRBW + NEO_KHZ800); //Enables Neopixels
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LEDPIN, NEO_GRBW + NEO_KHZ800); //Enables Neopixels
 
 void setup() {
   strip.setBrightness(BRIGHTNESS);
@@ -97,7 +97,7 @@ void resetEDPins()
   digitalWrite(MS22, LOW);
 }
 
-void motor1(int move1)
+void motor1(int move1) //Control logic for motor 1 (pan motor)
 {
   if (move1 > 0)
   {
@@ -121,7 +121,7 @@ void motor1(int move1)
   }
 }
 
-void motor2(int move2)
+void motor2(int move2) //Control logic for motor 2 (Tilt motor)
 {
   if (move2 > 0)
   {
@@ -143,7 +143,7 @@ void motor2(int move2)
   }
 }
 
-void LEDS(uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t White)
+void LEDS(uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t White) //Control logic for LEDs
 {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, Red, Green, Blue, White); 
