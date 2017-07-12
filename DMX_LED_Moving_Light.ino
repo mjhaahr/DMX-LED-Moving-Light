@@ -7,20 +7,20 @@
 #define NUM_LEDS 64
 #define BRIGHTNESS 255
 
-#define stp1 2
-#define dir1 3
-#define EN1  4
+#define stp1 2 //Motor Driver 1, Step Pin
+#define dir1 3 //Motor Driver 1, Direction Pin
+#define EN1  4 //Motor Driver 1, Enable Pin
 
-#define stp2 5
-#define dir2 6
-#define EN2  7
+#define stp2 5 //Motor Driver 2, Step Pin
+#define dir2 6 //Motor Driver 2, Direction Pin
+#define EN2  7 //Motor Driver 2, Enable Pin
 
-#define MS11 8
-#define MS21 9
-#define MS12 10
-#define MS22 11
+#define MS11 8 //Motor Driver 1, Microstep Pin 1
+#define MS21 9 //Motor Driver 1, Microstep Pin 2
+#define MS12 10 //Motor Driver 2, Microstep Pin 1
+#define MS22 11 //Motor Driver 2, Microstep Pin 2
 
-#define PanChannel 0
+#define PanChannel 0 //Channel numbers are Zero Indexed
 #define TiltChannel 1
 #define RedChannel 2
 #define GreenChannel 3
@@ -35,7 +35,7 @@ uint8_t GreenCurrent=0;
 uint8_t BlueCurrent=0;
 uint8_t WhiteCurrent=0;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRBW + NEO_KHZ800); //Enables Neopixels
 
 void setup() {
   strip.setBrightness(BRIGHTNESS);
