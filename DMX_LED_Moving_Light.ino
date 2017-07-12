@@ -41,9 +41,9 @@ void setup() {
   strip.setBrightness(BRIGHTNESS);
   strip.begin();
   strip.show();
-  ArduinoDmx0.set_control_pin(12); 
+  ArduinoDmx0.set_control_pin(12); //Set DMX control pin
   ArduinoDmx0.set_rx_address(1); 
-  ArduinoDmx0.set_rx_channels(192);
+  ArduinoDmx0.set_rx_channels(192); //Sets number of DMX channels
   ArduinoDmx0.init_rx(DMX512);
   pinMode(stp1, OUTPUT);
   pinMode(dir1, OUTPUT);
@@ -58,33 +58,25 @@ void setup() {
   resetEDPins(); 
 }
 void loop() {
-  digitalWrite(EN1, LOW);
-  digitalWrite(EN2, LOW);
+  digitalWrite(EN1, LOW); //Enables motor 1
+  digitalWrite(EN2, LOW); //Enables motor 1
   int DMXValue1 = ArduinoDmx0.RxBuffer[PanChannel];
   int DMXValue2 = ArduinoDmx0.RxBuffer[TiltChannel];
-  int Target1 = map (DMXValue1, 0, 255, 0, 800);
-  int Target2 = map (DMXValue2, 0, 255, 0, 300);
+  int PanTarget = map (DMXValue1, 0, 255, 0, 800); //Pan motor is mapped to two full rotations
+  int TiltTarget = map (DMXValue2, 0, 255, 0, 300); //Tilt motor is mapped to 3/4 of a rotation
   uint8_t RedTarget = ArduinoDmx0.RxBuffer[RedChannel];
   uint8_t GreenTarget = ArduinoDmx0.RxBuffer[GreenChannel];
   uint8_t BlueTarget = ArduinoDmx0.RxBuffer[BlueChannel];
   uint8_t WhiteTarget = ArduinoDmx0.RxBuffer[WhiteChannel];
-  if(Target1 >= (Motor1Current + 3))
+  if(PanTarget != Motor1Current) //Checks to see if the current pan motor position is different than the target
   {
-    motor1(Target1 - Motor1Current);
+    motor1(PanTarget - Motor1Current);
   }
-  else if (Target1 <= (Motor1Current - 3))
+  if(TiltTarget != Motor2Current) //Checks to see if the current tilt motor position is different than the target
   {
-    motor1(Target1 - Motor1Current);
+    motor2(TiltTarget - Motor2Current);
   }
-  if(Target2 >= (Motor2Current + 3))
-  {
-    motor2(Target2 - Motor2Current);
-  }
-  else if (Target2 <= (Motor2Current - 3))
-  {
-    motor2(Target2 - Motor2Current);
-  }
-  if (RedTarget != RedCurrent || GreenTarget != GreenCurrent || BlueTarget != BlueCurrent || WhiteTarget != WhiteCurrent)
+  if (RedTarget != RedCurrent || GreenTarget != GreenCurrent || BlueTarget != BlueCurrent || WhiteTarget != WhiteCurrent) //Checks to see if the current colors are different than the targets
   {
     LEDS(RedTarget, GreenTarget, BlueTarget, WhiteTarget);
   }
