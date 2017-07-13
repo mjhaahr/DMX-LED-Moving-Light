@@ -70,11 +70,11 @@ void loop() {
   uint8_t WhiteTarget = ArduinoDmx0.RxBuffer[WhiteChannel];
   if(PanTarget != Motor1Current) //Checks to see if the current pan motor position is different than the target
   {
-    motor1(PanTarget - Motor1Current);
+    Pan(PanTarget - Motor1Current);
   }
   if(TiltTarget != Motor2Current) //Checks to see if the current tilt motor position is different than the target
   {
-    motor2(TiltTarget - Motor2Current);
+    Tilt(TiltTarget - Motor2Current);
   }
   if (RedTarget != RedCurrent || GreenTarget != GreenCurrent || BlueTarget != BlueCurrent || WhiteTarget != WhiteCurrent) //Checks to see if the current colors are different than the targets
   {
@@ -97,7 +97,7 @@ void resetEDPins()
   digitalWrite(MS22, LOW);
 }
 
-void motor1(int move1) //Control logic for motor 1 (pan motor)
+void Pan(int move1) //Control logic for pan
 {
   if (move1 > 0)
   {
@@ -121,7 +121,7 @@ void motor1(int move1) //Control logic for motor 1 (pan motor)
   }
 }
 
-void motor2(int move2) //Control logic for motor 2 (Tilt motor)
+void Tilt(int move2) //Control logic for tilt
 {
   if (move2 > 0)
   {
