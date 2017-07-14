@@ -3,7 +3,7 @@
 
 #define    DMX512 (0)
 
-#define LED13
+#define LEDPIN 13
 #define NUM_LEDS 64
 #define BRIGHTNESS 255
 
