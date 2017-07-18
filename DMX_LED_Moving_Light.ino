@@ -62,8 +62,8 @@ void loop() {
   digitalWrite(EN2, LOW); //Enables motor 1
   int DMXValue1 = ArduinoDmx0.RxBuffer[PanChannel];
   int DMXValue2 = ArduinoDmx0.RxBuffer[TiltChannel];
-  int PanTarget = map (DMXValue1, 0, 255, 0, 800); //Pan motor is mapped to two full rotations
-  int TiltTarget = map (DMXValue2, 0, 255, 0, 200); //Tilt motor is mapped to 1/2 of a rotation
+  int PanTarget = map (DMXValue1, 0, 255, 0, 400); //Pan motor is mapped to one full rotation from the DMX value
+  int TiltTarget = map (DMXValue2, 0, 255, 0, 200); //Tilt motor is mapped to 1/2 of a rotation from the DMX value
   uint8_t RedTarget = ArduinoDmx0.RxBuffer[RedChannel];
   uint8_t GreenTarget = ArduinoDmx0.RxBuffer[GreenChannel];
   uint8_t BlueTarget = ArduinoDmx0.RxBuffer[BlueChannel];
